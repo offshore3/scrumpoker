@@ -1,6 +1,6 @@
-var express = require('express');
-var config = require('./config');
-var router = require('./router/router');
+import express from 'express';
+import config from './config';
+import router from './router/router';
 
 const appServer = express();
 router.config(appServer);

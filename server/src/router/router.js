@@ -1,5 +1,6 @@
 var authenticate = require('./authenticate');
 var accountController = require('../controller/accountController');
+var projectController = require('../controller/projectController');
 
 var router = {};
 
@@ -18,13 +19,13 @@ router.createProject = (request, response) => {
 }
 
 router.config = (appServer) => {
-    authenticate.init(appServer); 
-    
     var authActions = authenticate.actions;
-    authenticate.get("/", router.test)
-    authenticate.post("/login", router.login)
-    authenticate.post("/register", router.register)
-    authenticate.post("/createProject", router.createProject, authActions.requireLogin)
+
+    authenticate.init(appServer);    
+    authenticate.get("/", accountController.test)
+    authenticate.post("/login", accountController.login)
+    authenticate.post("/register", accountController.register)
+    authenticate.post("/createProject",projectController.createProject, authActions.requireLogin)
 }
 
 module.exports = router;
